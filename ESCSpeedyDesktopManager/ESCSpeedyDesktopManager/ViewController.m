@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"%@",NSHomeDirectory());
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomBackGroundColor:) name:@"changeBackGroundColor" object:nil];
 }
 

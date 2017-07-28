@@ -38,12 +38,9 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
 {
     // 停止服务
     [_httpServer stop];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 + (void)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes {
-    [[NSNotificationCenter defaultCenter] addObserver:[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [ESCSpeedyDesktopManager sharedSpeedyDesktopManager].httpServer = [[HTTPServer alloc] init];
@@ -61,35 +58,31 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     NSString* mainPage = [NSString stringWithFormat:@"%@/web/index.html",documentsPath];
     
     
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] writeToFile:mainPage image:image title:title appURLSchemes:appURLSchemes];
-    
-//    DDLogInfo(@"Setting document root: %@", webRootDir);
+    BOOL result = [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] writeToFile:mainPage image:image title:title appURLSchemes:appURLSchemes];
+    if (result == NO) {
+        return;
+    }
     
     [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager].httpServer setDocumentRoot:webRootDir];
     
     [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] startServer];
 }
 
-
 - (void)startServer
 {
+    [_httpServer stop];
     // Start the server (and check for problems)
     NSError *error;
-    if([_httpServer start:&error])
-    {
-//        DDLogInfo(@"Started HTTP Server on port %hu", [_httpServer listeningPort]);
-        [NSThread sleepForTimeInterval:1];
-        // open the url.
+    if([_httpServer start:&error]) {
         NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",[_httpServer listeningPort]];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
     }
-    else
-    {
-//        DDLogError(@"Error starting HTTP Server: %@", error);
+    else {
+        NSLog(@"startserver error = %@",error);
     }
 }
 
-- (void)writeToFile:(NSString *)path image:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes{
+- (BOOL)writeToFile:(NSString *)path image:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes{
     NSData* imageData = UIImagePNGRepresentation(image);
     NSString* imageDataBase64Str = [imageData base64EncodedString];
     
@@ -103,31 +96,7 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     
     NSString* htmlStrBase64 = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n<head lang=\"en\">\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<meta http-equiv=\"refresh\" content=\"1; data:text/html;charset=utf-8;base64,%@\">\n</head>\n<body>\n</body>\n</html>",contentStr];
     NSData *data = [htmlStrBase64 dataUsingEncoding:NSUTF8StringEncoding];
-    [data writeToFile:path atomically:YES];
+    return [data writeToFile:path atomically:YES];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    if([[UIDevice currentDevice].systemVersion integerValue] >= 6.0){
-        sleep(1);
-    }else {
-        sleep(2);
-    }
-    [_httpServer stop];
-}
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    NSError *error;
-    if(![_httpServer isRunning]){
-        if([_httpServer start:&error])
-        {
-//            DDLogInfo(@"Started HTTP Server on port %hu", [_httpServer listeningPort]);
-        }
-        else
-        {
-//            DDLogError(@"Error starting HTTP Server: %@", error);
-        }
-    }
-    
-}
 @end
