@@ -17,11 +17,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomBackGroundColor:) name:@"changeBackGroundColor" object:nil];
+}
+
+- (void)setCustomBackGroundColor:(NSNotification *)notification {
+    NSString *string = notification.object;
+    NSLog(@"string = %@",string);
+    if ([string containsString:@"blue"]) {
+        self.view.backgroundColor = [UIColor blueColor];
+    }else if ([string containsString:@"red"]) {
+        self.view.backgroundColor = [UIColor redColor];
+    }
 }
 
 - (IBAction)didClickBlueButton:(id)sender {
+    [ESCSpeedyDesktopManager creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"blue" appURLSchemes:@"escspeedydesktop://color:blue"];
 }
+
 - (IBAction)didClickRedButton:(id)sender {
+    [ESCSpeedyDesktopManager creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"red" appURLSchemes:@"escspeedydesktop://color:red"];
+
 }
 
 @end

@@ -106,5 +106,28 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     [data writeToFile:path atomically:YES];
 }
 
-
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    if([[UIDevice currentDevice].systemVersion integerValue] >= 6.0){
+        sleep(1);
+    }else {
+        sleep(2);
+    }
+    [_httpServer stop];
+}
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    NSError *error;
+    if(![_httpServer isRunning]){
+        if([_httpServer start:&error])
+        {
+//            DDLogInfo(@"Started HTTP Server on port %hu", [_httpServer listeningPort]);
+        }
+        else
+        {
+//            DDLogError(@"Error starting HTTP Server: %@", error);
+        }
+    }
+    
+}
 @end

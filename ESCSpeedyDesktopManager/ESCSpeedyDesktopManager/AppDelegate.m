@@ -47,5 +47,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url   {
+    [self applicationOpenURL:url];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    [self applicationOpenURL:url];
+    return YES;
+}
+
+- (void)applicationOpenURL:(NSURL *)url {
+    NSLog(@"url== %@",url);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeBackGroundColor" object:url.relativeString];
+}
 
 @end
