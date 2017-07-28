@@ -15,8 +15,6 @@
 		F02440E81F2AE882001BBDB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F02440E61F2AE882001BBDB4 /* LaunchScreen.storyboard */; };
 		F024415F1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F024415E1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.m */; };
 		F02441FF1F2B1626001BBDB4 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F02441C01F2B1626001BBDB4 /* Base64.m */; };
-		F02442001F2B1626001BBDB4 /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = F02441C21F2B1626001BBDB4 /* About.txt */; };
-		F02442011F2B1626001BBDB4 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F02441C41F2B1626001BBDB4 /* GCDAsyncSocket.m */; };
 		F02442021F2B1626001BBDB4 /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = F02441C61F2B1626001BBDB4 /* About.txt */; };
 		F02442031F2B1626001BBDB4 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F02441C81F2B1626001BBDB4 /* DDAbstractDatabaseLogger.m */; };
 		F02442041F2B1626001BBDB4 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F02441CA1F2B1626001BBDB4 /* DDASLLogger.m */; };
@@ -43,6 +41,7 @@
 		F02442191F2B1626001BBDB4 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F02441FA1F2B1626001BBDB4 /* HTTPFileResponse.m */; };
 		F024421A1F2B1626001BBDB4 /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F02441FC1F2B1626001BBDB4 /* HTTPRedirectResponse.m */; };
 		F024421B1F2B1626001BBDB4 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F02441FE1F2B1626001BBDB4 /* WebSocket.m */; };
+		F024421E1F2B1C14001BBDB4 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F024421D1F2B1C14001BBDB4 /* GCDAsyncSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,9 +59,6 @@
 		F024415E1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCSpeedyDesktopManager.m; sourceTree = "<group>"; };
 		F02441BF1F2B1626001BBDB4 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		F02441C01F2B1626001BBDB4 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		F02441C21F2B1626001BBDB4 /* About.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
-		F02441C31F2B1626001BBDB4 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
-		F02441C41F2B1626001BBDB4 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		F02441C61F2B1626001BBDB4 /* About.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
 		F02441C71F2B1626001BBDB4 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		F02441C81F2B1626001BBDB4 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
@@ -115,6 +111,8 @@
 		F02441FC1F2B1626001BBDB4 /* HTTPRedirectResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPRedirectResponse.m; sourceTree = "<group>"; };
 		F02441FD1F2B1626001BBDB4 /* WebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket.h; sourceTree = "<group>"; };
 		F02441FE1F2B1626001BBDB4 /* WebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocket.m; sourceTree = "<group>"; };
+		F024421C1F2B1C14001BBDB4 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		F024421D1F2B1C14001BBDB4 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,9 +192,8 @@
 		F02441C11F2B1626001BBDB4 /* CocoaAsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				F02441C21F2B1626001BBDB4 /* About.txt */,
-				F02441C31F2B1626001BBDB4 /* GCDAsyncSocket.h */,
-				F02441C41F2B1626001BBDB4 /* GCDAsyncSocket.m */,
+				F024421C1F2B1C14001BBDB4 /* GCDAsyncSocket.h */,
+				F024421D1F2B1C14001BBDB4 /* GCDAsyncSocket.m */,
 			);
 			path = CocoaAsyncSocket;
 			sourceTree = "<group>";
@@ -360,7 +357,6 @@
 			files = (
 				F02440E81F2AE882001BBDB4 /* LaunchScreen.storyboard in Resources */,
 				F02440E51F2AE882001BBDB4 /* Assets.xcassets in Resources */,
-				F02442001F2B1626001BBDB4 /* About.txt in Resources */,
 				F02440E31F2AE882001BBDB4 /* Main.storyboard in Resources */,
 				F024420A1F2B1626001BBDB4 /* README.txt in Resources */,
 				F02442021F2B1626001BBDB4 /* About.txt in Resources */,
@@ -380,7 +376,7 @@
 				F02442161F2B1626001BBDB4 /* HTTPDataResponse.m in Sources */,
 				F02442171F2B1626001BBDB4 /* HTTPDynamicFileResponse.m in Sources */,
 				F02442041F2B1626001BBDB4 /* DDASLLogger.m in Sources */,
-				F02442011F2B1626001BBDB4 /* GCDAsyncSocket.m in Sources */,
+				F024421E1F2B1C14001BBDB4 /* GCDAsyncSocket.m in Sources */,
 				F02440E01F2AE882001BBDB4 /* ViewController.m in Sources */,
 				F02442091F2B1626001BBDB4 /* DispatchQueueLogFormatter.m in Sources */,
 				F02442071F2B1626001BBDB4 /* DDTTYLogger.m in Sources */,
