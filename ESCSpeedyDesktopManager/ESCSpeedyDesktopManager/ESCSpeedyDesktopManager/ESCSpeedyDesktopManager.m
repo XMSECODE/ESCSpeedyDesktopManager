@@ -14,10 +14,6 @@
 
 @interface ESCSpeedyDesktopManager ()
 
-@property(nonatomic,copy)NSString* webRootDir;
-
-@property(nonatomic,copy)NSString* mainPage;
-
 @property (nonatomic,strong)HTTPServer *httpServer;
 
 @end
@@ -34,17 +30,16 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     return staticSpeedyDesktopManager;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     // 停止服务
     [_httpServer stop];
 }
 
-+ (BOOL)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes {
+- (BOOL)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes {
     
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    [ESCSpeedyDesktopManager sharedSpeedyDesktopManager].httpServer = [[HTTPServer alloc] init];
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager].httpServer setType:@"_http._tcp."];
+    self.httpServer = [[HTTPServer alloc] init];
+    [self.httpServer setType:@"_http._tcp."];
     
     //启动本地httpSever和服务器首页页面
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -58,14 +53,14 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     NSString* mainPage = [NSString stringWithFormat:@"%@/web/index.html",documentsPath];
     
     
-    BOOL result = [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] writeToFile:mainPage image:image title:title appURLSchemes:appURLSchemes];
+    BOOL result = [self writeToFile:mainPage image:image title:title appURLSchemes:appURLSchemes];
     if (result == NO) {
         return NO;
     }
     
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager].httpServer setDocumentRoot:webRootDir];
+    [self.httpServer setDocumentRoot:webRootDir];
     
-    return [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] startServer];
+    return [self startServer];
 }
 
 - (BOOL)startServer {
