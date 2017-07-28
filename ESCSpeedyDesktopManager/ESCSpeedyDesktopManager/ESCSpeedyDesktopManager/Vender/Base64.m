@@ -50,19 +50,7 @@
     
     NSData *decoded = nil;
     
-#if __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_9 || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-    
-    if (![NSData instancesRespondToSelector:@selector(initWithBase64EncodedString:options:)])
-    {
-        decoded = [[self alloc] initWithBase64Encoding:[string stringByReplacingOccurrencesOfString:@"[^A-Za-z0-9+/=]" withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, [string length])]];
-    }
-    else
-    
-#endif
-        
-    {
-        decoded = [[self alloc] initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    }
+    decoded = [[self alloc] initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];
     
     return [decoded length]? decoded: nil;
 }
@@ -73,31 +61,20 @@
     
     NSString *encoded = nil;
     
-#if __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_9 || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     
-    if (![NSData instancesRespondToSelector:@selector(base64EncodedStringWithOptions:)])
+    switch (wrapWidth)
     {
-        encoded = [self base64Encoding];
-    }
-    else
-    
-#endif
-    
-    {
-        switch (wrapWidth)
+        case 64:
         {
-            case 64:
-            {
-                return [self base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-            }
-            case 76:
-            {
-                return [self base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength];
-            }
-            default:
-            {
-                encoded = [self base64EncodedStringWithOptions:(NSDataBase64EncodingOptions)0];
-            }
+            return [self base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        }
+        case 76:
+        {
+            return [self base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength];
+        }
+        default:
+        {
+            encoded = [self base64EncodedStringWithOptions:(NSDataBase64EncodingOptions)0];
         }
     }
     
