@@ -11,6 +11,6 @@
 
 @interface ESCSpeedyDesktopManager : NSObject
 
-+ (void)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes;
++ (BOOL)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes;
 
 @end

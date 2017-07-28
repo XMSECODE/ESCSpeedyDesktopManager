@@ -40,7 +40,7 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     [_httpServer stop];
 }
 
-+ (void)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes {
++ (BOOL)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes {
     
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [ESCSpeedyDesktopManager sharedSpeedyDesktopManager].httpServer = [[HTTPServer alloc] init];
@@ -60,25 +60,26 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     
     BOOL result = [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] writeToFile:mainPage image:image title:title appURLSchemes:appURLSchemes];
     if (result == NO) {
-        return;
+        return NO;
     }
     
     [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager].httpServer setDocumentRoot:webRootDir];
     
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] startServer];
+    return [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] startServer];
 }
 
-- (void)startServer
-{
+- (BOOL)startServer {
     [_httpServer stop];
     // Start the server (and check for problems)
     NSError *error;
     if([_httpServer start:&error]) {
         NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",[_httpServer listeningPort]];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
+        return YES;
     }
     else {
         NSLog(@"startserver error = %@",error);
+        return NO;
     }
 }
 
