@@ -32,11 +32,19 @@
 }
 
 - (IBAction)didClickBlueButton:(id)sender {
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"blue" appURLSchemes:@"escspeedydesktop://color:blue"];
+    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"blue" appURLSchemes:@"escspeedydesktop://color:blue" success:^{
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (IBAction)didClickRedButton:(id)sender {
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"red" appURLSchemes:@"escspeedydesktop://color:red"];
+    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"red" appURLSchemes:@"escspeedydesktop://color:red" success:^{
+        
+    } failure:^(NSError *error) {
+        
+    }];
 
 }
 

@@ -11,10 +11,17 @@
 #import "HTTPServer.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
+#import "ESCHTTPServer.h"
 
 @interface ESCSpeedyDesktopManager ()
 
-@property (nonatomic,strong)HTTPServer *httpServer;
+@property (nonatomic,strong)ESCHTTPServer *httpServer;
+
+@property (nonatomic, copy) void(^success)(void);
+
+@property (nonatomic, copy) void(^failure)(NSError *error);
+
+@property (nonatomic, strong) NSOperationQueue *openQueue;
 
 @end
 
@@ -26,6 +33,8 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         staticSpeedyDesktopManager = [[ESCSpeedyDesktopManager alloc] init];
+        staticSpeedyDesktopManager.openQueue = [[NSOperationQueue alloc] init];
+        staticSpeedyDesktopManager.openQueue.maxConcurrentOperationCount = 1;
     });
     return staticSpeedyDesktopManager;
 }
@@ -33,13 +42,56 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
 - (void)dealloc {
     // 停止服务
     [_httpServer stop];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (BOOL)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes {
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self setNotification];
+    }
+    return self;
+}
+
+- (void)setNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startServerSuccess) name:ESCHTTPServerPublishServiceSuccessNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startServerFailure:) name:ESCHTTPServerPublishServiceFailureNotificationName object:nil];
+}
+
+- (void)startServerSuccess {
+    NSLog(@"success");
+    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+        NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",[_httpServer listeningPort]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
+    }];
+    self.openQueue.suspended = YES;
+    [self.openQueue addOperation:operation];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.openQueue.suspended = NO;
+    });
+    self.success();
+}
+
+- (void)startServerFailure:(NSNotification *)notification {
+    NSError *error = [NSError errorWithDomain:@"ESCSpeedyDesktopManager" code:-1 userInfo:@{NSLocalizedDescriptionKey:notification.object}];
+    NSLog(@"failure");
+    [self.openQueue cancelAllOperations];
+    self.failure(error);
+}
+
+- (void)creatSpeedyDesktopWithImage:(UIImage *)image
+                              title:(NSString *)title
+                      appURLSchemes:(NSString *)appURLSchemes
+                            success:(void(^)())success
+                            failure:(void(^)(NSError *error))failure {
+    self.success = success;
+    self.failure = failure;
     
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    self.httpServer = [[HTTPServer alloc] init];
+    self.httpServer = [[ESCHTTPServer alloc] init];
     [self.httpServer setType:@"_http._tcp."];
+    self.httpServer.port = 
     
     //启动本地httpSever和服务器首页页面
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -55,26 +107,25 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     
     BOOL result = [self writeToFile:mainPage image:image title:title appURLSchemes:appURLSchemes];
     if (result == NO) {
-        return NO;
+        NSError *error = [NSError errorWithDomain:@"ESCSpeedyDesktopManager" code:-1 userInfo:@{NSLocalizedDescriptionKey:@"write file failure"}];
+        failure(error);
+        return ;
     }
     
     [self.httpServer setDocumentRoot:webRootDir];
     
-    return [self startServer];
+    [self startServer];
 }
 
-- (BOOL)startServer {
-    [_httpServer stop];
+- (void)startServer {
     // Start the server (and check for problems)
     NSError *error;
     if([_httpServer start:&error]) {
-        NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",[_httpServer listeningPort]];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
-        return YES;
+
     }
     else {
         NSLog(@"startserver error = %@",error);
-        return NO;
+        self.failure(error);
     }
 }
 

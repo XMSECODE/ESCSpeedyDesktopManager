@@ -13,6 +13,10 @@
 
 + (instancetype)sharedSpeedyDesktopManager;
 
-- (BOOL)creatSpeedyDesktopWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes;
+- (void)creatSpeedyDesktopWithImage:(UIImage *)image
+                              title:(NSString *)title
+                      appURLSchemes:(NSString *)appURLSchemes
+                            success:(void(^)())success
+                            failure:(void(^)(NSError *error))failure;
 
 @end

@@ -44,6 +44,7 @@
 		F02442451F2B1D76001BBDB4 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F02442361F2B1D76001BBDB4 /* DDLog.m */; };
 		F02442461F2B1D76001BBDB4 /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F024423A1F2B1D76001BBDB4 /* DDOSLogger.m */; };
 		F02442471F2B1D76001BBDB4 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F024423C1F2B1D76001BBDB4 /* DDTTYLogger.m */; };
+		F02442501F2B2566001BBDB4 /* ESCHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F024424F1F2B2566001BBDB4 /* ESCHTTPServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,8 @@
 		F024423A1F2B1D76001BBDB4 /* DDOSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDOSLogger.m; sourceTree = "<group>"; };
 		F024423B1F2B1D76001BBDB4 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
 		F024423C1F2B1D76001BBDB4 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		F024424E1F2B2566001BBDB4 /* ESCHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCHTTPServer.h; sourceTree = "<group>"; };
+		F024424F1F2B2566001BBDB4 /* ESCHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCHTTPServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				F02441BE1F2B1626001BBDB4 /* Vender */,
+				F024424E1F2B2566001BBDB4 /* ESCHTTPServer.h */,
+				F024424F1F2B2566001BBDB4 /* ESCHTTPServer.m */,
 				F024415D1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.h */,
 				F024415E1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.m */,
 			);
@@ -411,6 +416,7 @@
 				F024421E1F2B1C14001BBDB4 /* GCDAsyncSocket.m in Sources */,
 				F02440E01F2AE882001BBDB4 /* ViewController.m in Sources */,
 				F02442181F2B1626001BBDB4 /* HTTPErrorResponse.m in Sources */,
+				F02442501F2B2566001BBDB4 /* ESCHTTPServer.m in Sources */,
 				F024421B1F2B1626001BBDB4 /* WebSocket.m in Sources */,
 				F02442421F2B1D76001BBDB4 /* DDASLLogCapture.m in Sources */,
 				F02441FF1F2B1626001BBDB4 /* Base64.m in Sources */,
