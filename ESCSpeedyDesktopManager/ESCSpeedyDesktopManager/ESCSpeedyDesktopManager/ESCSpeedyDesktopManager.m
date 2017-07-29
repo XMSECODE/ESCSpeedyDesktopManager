@@ -67,7 +67,7 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     }];
     self.openQueue.suspended = YES;
     [self.openQueue addOperation:operation];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.openQueue.suspended = NO;
     });
     self.success();
@@ -91,7 +91,7 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     self.httpServer = [[ESCHTTPServer alloc] init];
     [self.httpServer setType:@"_http._tcp."];
-    self.httpServer.port = 
+//    self.httpServer.port = 38563;
     
     //启动本地httpSever和服务器首页页面
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
