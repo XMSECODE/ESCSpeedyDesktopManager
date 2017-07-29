@@ -1,0 +1,3 @@
+# ESCSpeedyDesktopManager
+iOS创建桌面快捷方式
+利用safari打开app
