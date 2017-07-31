@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ESCSpeedyDesktopManager.h"
+#import "UIImage+TintColor.h"
 
 @interface ViewController ()
 
@@ -32,7 +33,7 @@
 }
 
 - (IBAction)didClickBlueButton:(id)sender {
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"blue" appURLSchemes:@"escspeedydesktop://color:blue" success:^{
+    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[[UIImage imageNamed:@"speedy_picture"] imageWithColor:[UIColor blueColor]] title:@"blue" appURLSchemes:@"escspeedydesktop://color:blue" success:^{
         
     } failure:^(NSError *error) {
         
@@ -40,12 +41,14 @@
 }
 
 - (IBAction)didClickRedButton:(id)sender {
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[UIImage imageNamed:@"student"] title:@"red" appURLSchemes:@"escspeedydesktop://color:red" success:^{
+    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[[UIImage imageNamed:@"speedy_picture"] imageWithColor:[UIColor redColor]] title:@"red" appURLSchemes:@"escspeedydesktop://color:red" success:^{
         
     } failure:^(NSError *error) {
         
     }];
 
 }
+
+
 
 @end

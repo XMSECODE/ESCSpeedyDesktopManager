@@ -45,6 +45,7 @@
 		F02442461F2B1D76001BBDB4 /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F024423A1F2B1D76001BBDB4 /* DDOSLogger.m */; };
 		F02442471F2B1D76001BBDB4 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F024423C1F2B1D76001BBDB4 /* DDTTYLogger.m */; };
 		F02442501F2B2566001BBDB4 /* ESCHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F024424F1F2B2566001BBDB4 /* ESCHTTPServer.m */; };
+		F06F89641F2ED78700995F89 /* UIImage+TintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F06F89631F2ED78700995F89 /* UIImage+TintColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,8 @@
 		F024423C1F2B1D76001BBDB4 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		F024424E1F2B2566001BBDB4 /* ESCHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCHTTPServer.h; sourceTree = "<group>"; };
 		F024424F1F2B2566001BBDB4 /* ESCHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCHTTPServer.m; sourceTree = "<group>"; };
+		F06F89621F2ED78700995F89 /* UIImage+TintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TintColor.h"; sourceTree = "<group>"; };
+		F06F89631F2ED78700995F89 /* UIImage+TintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TintColor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,8 @@
 				F02440DC1F2AE882001BBDB4 /* AppDelegate.m */,
 				F02440DE1F2AE882001BBDB4 /* ViewController.h */,
 				F02440DF1F2AE882001BBDB4 /* ViewController.m */,
+				F06F89621F2ED78700995F89 /* UIImage+TintColor.h */,
+				F06F89631F2ED78700995F89 /* UIImage+TintColor.m */,
 				F02440E11F2AE882001BBDB4 /* Main.storyboard */,
 				F02440E41F2AE882001BBDB4 /* Assets.xcassets */,
 				F02440E61F2AE882001BBDB4 /* LaunchScreen.storyboard */,
@@ -415,6 +420,7 @@
 				F02442171F2B1626001BBDB4 /* HTTPDynamicFileResponse.m in Sources */,
 				F024421E1F2B1C14001BBDB4 /* GCDAsyncSocket.m in Sources */,
 				F02440E01F2AE882001BBDB4 /* ViewController.m in Sources */,
+				F06F89641F2ED78700995F89 /* UIImage+TintColor.m in Sources */,
 				F02442181F2B1626001BBDB4 /* HTTPErrorResponse.m in Sources */,
 				F02442501F2B2566001BBDB4 /* ESCHTTPServer.m in Sources */,
 				F024421B1F2B1626001BBDB4 /* WebSocket.m in Sources */,
