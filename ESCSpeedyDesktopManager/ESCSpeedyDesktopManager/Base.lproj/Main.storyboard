@@ -23,6 +23,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kg7-oG-nUd">
                                 <rect key="frame" x="172" y="220" width="31" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="蓝色"/>
                                 <connections>
                                     <action selector="didClickBlueButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rgy-pd-dW0"/>
@@ -30,7 +31,10 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc4-1f-Uhd">
                                 <rect key="frame" x="172" y="350" width="31" height="30"/>
-                                <state key="normal" title="红色"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="红色">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="didClickRedButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aW3-Ei-wMl"/>
                                 </connections>
