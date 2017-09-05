@@ -370,7 +370,7 @@
 				TargetAttributes = {
 					F02440D41F2AE881001BBDB4 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 457L3UJ4DJ;
+						DevelopmentTeam = 4SF28MHQDQ;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -568,7 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 457L3UJ4DJ;
+				DEVELOPMENT_TEAM = 4SF28MHQDQ;
 				INFOPLIST_FILE = ESCSpeedyDesktopManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -584,7 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 457L3UJ4DJ;
+				DEVELOPMENT_TEAM = 4SF28MHQDQ;
 				INFOPLIST_FILE = ESCSpeedyDesktopManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
