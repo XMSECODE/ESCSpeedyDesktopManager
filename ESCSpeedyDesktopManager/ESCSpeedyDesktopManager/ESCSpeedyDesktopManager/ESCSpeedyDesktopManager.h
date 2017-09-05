@@ -13,6 +13,8 @@
 
 + (instancetype)sharedSpeedyDesktopManager;
 
+- (void)prepare;
+
 - (void)creatSpeedyDesktopWithImage:(UIImage *)image
                               title:(NSString *)title
                       appURLSchemes:(NSString *)appURLSchemes

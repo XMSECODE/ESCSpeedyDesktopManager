@@ -54,6 +54,10 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     return self;
 }
 
+- (void)prepare {
+    
+}
+
 - (void)setNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startServerSuccess) name:ESCHTTPServerPublishServiceSuccessNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startServerFailure:) name:ESCHTTPServerPublishServiceFailureNotificationName object:nil];
