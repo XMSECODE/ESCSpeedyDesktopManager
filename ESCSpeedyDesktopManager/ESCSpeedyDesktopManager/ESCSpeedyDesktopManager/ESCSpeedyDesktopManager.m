@@ -12,16 +12,17 @@
 #import "DDLog.h"
 #import "DDTTYLogger.h"
 #import "ESCHTTPServer.h"
+#import "ESCGCDHTTPServer.h"
 
 @interface ESCSpeedyDesktopManager ()
 
 @property (nonatomic,strong)ESCHTTPServer *httpServer;
 
+@property(nonatomic,strong)ESCGCDHTTPServer* gcdHttpServer;
+
 @property (nonatomic, copy) void(^success)(void);
 
 @property (nonatomic, copy) void(^failure)(NSError *error);
-
-@property (nonatomic, strong) NSOperationQueue *openQueue;
 
 @end
 
@@ -33,8 +34,6 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         staticSpeedyDesktopManager = [[ESCSpeedyDesktopManager alloc] init];
-        staticSpeedyDesktopManager.openQueue = [[NSOperationQueue alloc] init];
-        staticSpeedyDesktopManager.openQueue.maxConcurrentOperationCount = 1;
     });
     return staticSpeedyDesktopManager;
 }
@@ -64,24 +63,35 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
 }
 
 - (void)startServerSuccess {
-    NSLog(@"success");
-    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-        NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",[_httpServer listeningPort]];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
-    }];
-    self.openQueue.suspended = YES;
-    [self.openQueue addOperation:operation];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.openQueue.suspended = NO;
-    });
+    NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",[_httpServer listeningPort]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
     self.success();
 }
 
 - (void)startServerFailure:(NSNotification *)notification {
     NSError *error = [NSError errorWithDomain:@"ESCSpeedyDesktopManager" code:-1 userInfo:@{NSLocalizedDescriptionKey:notification.object}];
     NSLog(@"failure");
-    [self.openQueue cancelAllOperations];
     self.failure(error);
+}
+
+- (void)creatSpeedyDesktopGCDWebServerWithImage:(UIImage *)image
+                                          title:(NSString *)title
+                                  appURLSchemes:(NSString *)appURLSchemes
+                                        success:(void(^)())success
+                                        failure:(void(^)(NSError *error))failure {
+    self.success = success;
+    self.failure = failure;
+    if (self.gcdHttpServer) {
+        [self.gcdHttpServer stop];
+    }
+    self.gcdHttpServer = [[ESCGCDHTTPServer alloc] init];
+    
+    NSString *content = [self createContentWithImage:image title:title appURLSchemes:appURLSchemes];
+    [self.gcdHttpServer startWithContent:content];
+    
+    NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",8080];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
+
 }
 
 - (void)creatSpeedyDesktopWithImage:(UIImage *)image
@@ -96,7 +106,6 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     self.httpServer = [[ESCHTTPServer alloc] init];
     [self.httpServer setType:@"_http._tcp."];
 //    self.httpServer.port = 38563;
-    
     //启动本地httpSever和服务器首页页面
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = paths[0];
@@ -134,6 +143,12 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
 }
 
 - (BOOL)writeToFile:(NSString *)path image:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes{
+    NSString* htmlStrBase64 = [self createContentWithImage:image title:title appURLSchemes:appURLSchemes];
+    NSData *data = [htmlStrBase64 dataUsingEncoding:NSUTF8StringEncoding];
+    return [data writeToFile:path atomically:YES];
+}
+
+- (NSString *)createContentWithImage:(UIImage *)image title:(NSString *)title  appURLSchemes:(NSString *)appURLSchemes {
     NSData* imageData = UIImagePNGRepresentation(image);
     NSString* imageDataBase64Str = [imageData base64EncodedString];
     
@@ -160,8 +175,7 @@ static ESCSpeedyDesktopManager *staticSpeedyDesktopManager;
     contentStr = [contentStr stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
     
     NSString* htmlStrBase64 = [NSString stringWithFormat:@"<!DOCTYPE html>\n<html>\n<head lang=\"en\">\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<meta http-equiv=\"refresh\" content=\"1; data:text/html;charset=utf-8;base64,%@\">\n</head>\n<body>\n</body>\n</html>",contentStr];
-    NSData *data = [htmlStrBase64 dataUsingEncoding:NSUTF8StringEncoding];
-    return [data writeToFile:path atomically:YES];
+    return htmlStrBase64;
 }
 
 @end

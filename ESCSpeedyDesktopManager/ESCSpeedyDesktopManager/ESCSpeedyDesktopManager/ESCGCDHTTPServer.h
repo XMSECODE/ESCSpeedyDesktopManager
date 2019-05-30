@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ESCGCDHTTPServer : NSObject
 
-- (void)start;
+- (void)startWithContent:(NSString *)content;
+
+- (void)stop;
 
 @end
 

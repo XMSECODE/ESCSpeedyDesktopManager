@@ -21,4 +21,10 @@
                             success:(void(^)())success
                             failure:(void(^)(NSError *error))failure;
 
+- (void)creatSpeedyDesktopGCDWebServerWithImage:(UIImage *)image
+                                          title:(NSString *)title
+                                  appURLSchemes:(NSString *)appURLSchemes
+                                        success:(void(^)())success
+                                        failure:(void(^)(NSError *error))failure;
+
 @end

@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",NSHomeDirectory());
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCustomBackGroundColor:) name:@"changeBackGroundColor" object:nil];
 }
 
@@ -33,7 +34,8 @@
 }
 
 - (IBAction)didClickBlueButton:(id)sender {
-    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[[UIImage imageNamed:@"speedy_picture"] imageWithColor:[UIColor blueColor]] title:@"blue" appURLSchemes:@"escspeedydesktop://color:blue" success:^{
+    //GCDWebServer
+    [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopGCDWebServerWithImage:[[UIImage imageNamed:@"speedy_picture"] imageWithColor:[UIColor blueColor]] title:@"blue" appURLSchemes:@"escspeedydesktop://color:blue" success:^{
         
     } failure:^(NSError *error) {
         
@@ -41,6 +43,7 @@
 }
 
 - (IBAction)didClickRedButton:(id)sender {
+    //HTTPServer
     [[ESCSpeedyDesktopManager sharedSpeedyDesktopManager] creatSpeedyDesktopWithImage:[[UIImage imageNamed:@"speedy_picture"] imageWithColor:[UIColor redColor]] title:@"red" appURLSchemes:@"escspeedydesktop://color:red" success:^{
         
     } failure:^(NSError *error) {

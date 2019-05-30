@@ -245,10 +245,10 @@
 				F02441BE1F2B1626001BBDB4 /* Vender */,
 				F024424E1F2B2566001BBDB4 /* ESCHTTPServer.h */,
 				F024424F1F2B2566001BBDB4 /* ESCHTTPServer.m */,
-				F024415D1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.h */,
-				F024415E1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.m */,
 				F075B4EB229FB1A50001F914 /* ESCGCDHTTPServer.h */,
 				F075B4EC229FB1A50001F914 /* ESCGCDHTTPServer.m */,
+				F024415D1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.h */,
+				F024415E1F2AE9DE001BBDB4 /* ESCSpeedyDesktopManager.m */,
 			);
 			path = ESCSpeedyDesktopManager;
 			sourceTree = "<group>";
